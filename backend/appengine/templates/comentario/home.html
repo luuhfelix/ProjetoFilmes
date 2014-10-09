@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+{% block css %}
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-social.css"/>
+    <link rel="stylesheet" href="/static/font-awesome-4.2.0/css/font-awesome.min.css"/>
+{% endblock %}
+{% block body %}
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>TRAILER - ANABELLE</h1>
+
+            </div>
+        </div>
+        <br/>
+
+        <div class="row">
+
+            {% block video %}
+            <div class="col-md-6 col-md-offset-3">
+                <video controls id="video" width="320" height="240"  preload autobuffer>
+                    <source src="/static/img/ana.mp4" type="video/mp4">
+
+                </video>
+
+            </div>
+            {% endblock %}
+
+
+        </div>
+
+    </div>
+{% endblock %}

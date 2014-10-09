@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% block body %}
+{% set comentario=comentario or None %}
+{% set errors=errors or None %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <br/>
+
+                <div class="well">
+                    <h1 class="text-center">{% trans %}Formulário de Filmes{% endtrans %}</h1>
+
+                    <form action="{{ salvar_path }}" method="post" role="form">
+                        {{ csrf_input() }}
+                        {{ form_input(_('Título'),'titulo',comentario.titulo,errors.titulo) }}
+
+                        <button type="submit" class="btn btn-success">{% trans %}Salvar{% endtrans %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
