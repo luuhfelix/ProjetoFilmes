@@ -9,7 +9,7 @@ from gaegraph.model import Node, Arc
 from gaepermission.decorator import login_not_required
 from tekton import router
 from tekton.gae.middleware.redirect import RedirectResponse
-
+'''
 @login_not_required
 @no_csrf
 def index():
@@ -25,6 +25,7 @@ def index():
     contexto={'filme_lista': filme_lista,'form_path': router.to_path(form)}
     return TemplateResponse(contexto)
 '''
+
 @no_csrf
 def index(_logged_user):
     chave_do_usuario = _logged_user.key
@@ -41,13 +42,14 @@ def index(_logged_user):
         filme['delete_path'] = '%s/%s' %(delete_path,filme['id'])
     contexto={'filme_lista': filme_lista,'form_path': router.to_path(form)}
     return TemplateResponse(contexto)
-'''
 
+'''
 def delete(filme_id):
     chave = ndb.Key(Filme,int(filme_id))
     chave.delete()
     return RedirectResponse(router.to_path(index))
 '''
+
 def delete(filme_id):
     chave = ndb.Key(Filme,int(filme_id))
     chave.delete()
@@ -55,7 +57,7 @@ def delete(filme_id):
     chaves_dos_arcos = query.fetch(keys_only=True)
     ndb.delete_multi(chaves_dos_arcos)
     return RedirectResponse(router.to_path(index))
-'''
+
 
 @no_csrf
 def editar_form(filme_id):
@@ -86,7 +88,7 @@ def editar(filme_id,**propriedades):
 def form():
     contexto={'salvar_path': router.to_path(salvar)}
     return TemplateResponse(contexto)
-
+'''
 @no_csrf
 def salvar(**propriedades):
     filme_form=FilmeForm(**propriedades)
@@ -100,6 +102,7 @@ def salvar(**propriedades):
         filme.put()
         return RedirectResponse(router.to_path(index))
 '''
+
 @no_csrf
 def salvar(_logged_user,**propriedades):
     filme_form=FilmeForm(**propriedades)
@@ -115,7 +118,7 @@ def salvar(_logged_user,**propriedades):
         autor_arco = AutorArco(origin=chave_do_usuario,destination=chave_de_filmes)
         autor_arco.put()
         return RedirectResponse(router.to_path(index))
-'''
+
 class Filme(Node):
     titulo=ndb.StringProperty(required=True)
     lancamento=ndb.DateProperty(required=True)
