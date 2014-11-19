@@ -1,0 +1,93 @@
+{% extends 'filmecartazs/base.html' %}
+{% block js %}
+<script type = "text/javascript" src = "/static/angular/js/angular.min.js"></script>
+        <script type = "text/javascript" src = "/static/filmelancamento/js/filmelancamento.js"></script>
+        <script type="text/javascript">
+
+
+            var servico=angular.module('servico',[]);
+            servico.factory('CartazApi',function($http){
+                return{
+                    salvar: function(lanca){
+                         return $http.post('{{ salvar_path }}', lanca);
+                    },
+                    listar: function(){
+                        return $http.post('/filmecartazs/rest');
+                    },
+                    deletar: function(id){
+                         return $http.post('{{ deletar_path }}',{cartaz_id:id});
+                    },
+                    editar: function(lanca){
+                        return $http.post('{{ editar_path }}',{cartaz_id:lanca.id,titulo:lanca.titulo,lancamento:lanca.lancamento,de:lanca.de,genero:lanca.genero,com:lanca.com});
+
+                    }
+                };
+            });
+            var filmeApp=angular.module('filmeApp', ['filmeModulo','servico']);
+            function FilmeController($scope, CartazApi){
+                $scope.lanca={};
+                $scope.mostrarFormFlag=false;
+                $scope.listandoFlag=true;
+                $scope.filmeLista=[];
+                CartazApi.listar().success(function(filmes){
+                    $scope.filmeLista=filmes;
+                    $scope.listandoFlag=false;
+                });
+
+                $scope.mostrarOuEsconderForm=function(){
+                    $scope.mostrarFormFlag=!$scope.mostrarFormFlag;
+
+                };
+
+                $scope.adicionarFilme=function(lanca){
+                    $scope.filmeLista.unshift(lanca)
+                };
+
+                $scope.removerFilme=function(lanca){
+                    var filmeLista = $scope.filmeLista;
+                   for(var i=0; i<filmeLista.length;i+=1){
+                       if(lanca.id==filmeLista[i].id){
+                           filmeLista.splice(i,1);
+                           break;
+                       }
+                   }
+                };
+
+
+
+            }
+        </script>
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" ng-app="filmeApp" ng-controller="FilmeController">
+                <h1>{% trans %}Filmes em Cartaz {% endtrans %}  </h1>
+                {% if _logged_user and ('ADMIN' in _logged_user.groups) %}
+                <a href="{{ admin_path }}" class="btn btn-success">{% trans %}Admin{% endtrans %}</a>
+                {% endif %}
+                <button class="btn btn-success" ng-click="mostrarOuEsconderForm()">Adicionar novo Filme</button>
+            <br />
+            <br />
+                <lancamentoform ng-show="mostrarFormFlag" cartaz="lanca" save-complete="adicionarFilme(lanca)"></lancamentoform>
+                <hr>
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th/>
+                        <th>{% trans %}Titulo{% endtrans %}</th>
+                        <th>{% trans %}Lancamento{% endtrans %}</th>
+                        <th>{% trans %}De{% endtrans %}</th>
+                        <th>{% trans %}Genero{% endtrans %}</th>
+                        <th>{% trans %}Com{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr filmelinha ng-repeat="f in filmeLista" cartaz="f" delete-complete="removerFilme(lanca)"></tr>
+                    </tbody>
+                     <img src="/static/img/ajax.gif" ng-show="listandoFlag" />
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

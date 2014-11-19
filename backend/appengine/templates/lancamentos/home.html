@@ -1,0 +1,70 @@
+{% extends 'lancamentos/base.html' %}
+{% block js %}
+        <script type = "text/javascript" src = "/static/angular/js/angular.min.js"></script>
+        <script type = "text/javascript" src = "/static/filmelancamento/js/filmelancamento.js"></script>
+        <script type="text/javascript">
+
+            var servico=angular.module('servico',[]);
+            servico.factory('FilmeApi', function($http){
+                return{
+                    salvar: function(lanca){
+                        return $http.post('/lancamentos/rest/save',lanca);
+                    }
+
+                };
+            });
+            var filmeApp=angular.module('filmeApp', ['filmeModulo']);
+            function FilmeController($scope){
+                $scope.lanca={titulo:'Jogos Vorazes em chamas',lancamento:'02/12/2013',de:'hhhhhh', genero:'ficcao',com:'jjjj'};
+                $scope.mostrarFormFlag=false;
+
+                $scope.mostrarOuEsconderForm=function(){
+                    $scope.mostrarFormFlag=!$scope.mostrarFormFlag;
+
+                }
+
+            }
+        </script>
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" ng-app="filmeApp" ng-controller="FilmeController">
+                <h1>{% trans %}This is a generic home for lancamento_app {% endtrans %}  </h1>
+                <button class="btn btn-success" ng-click="mostrarOuEsconderForm()">Adicionar novo Filme</button>
+            <br />
+            <br />
+                <lancamentoform ng-show="mostrarFormFlag" lancamento="lanca"></lancamentoform>
+                <hr>
+                <h2>{% trans %}List of Lancamentos{% endtrans %}</h2>
+
+            <br />
+            <br />
+
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>{% trans %}Titulo{% endtrans %}</th>
+                        <th>{% trans %}Lancamento{% endtrans %}</th>
+                        <th>{% trans %}De{% endtrans %}</th>
+                        <th>{% trans %}Genero{% endtrans %}</th>
+                        <th>{% trans %}Com{% endtrans %}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for lancamento in lancamentos %}
+                        <tr>
+                            <td>{{ lancamento.titulo }}</td>
+                            <td>{{ lancamento.lancamento }}</td>
+                            <td>{{ lancamento.de }}</td>
+                            <td>{{ lancamento.genero }}</td>
+                            <td>{{ lancamento.com }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -5,7 +5,7 @@ from gaegraph.model import Node
 from gaeforms.ndb import property
 
 
-class Filmes(Node):
+class Lancamento(Node):
     titulo = ndb.StringProperty(required=True)
     lancamento = ndb.DateProperty(required=True)
     de = ndb.StringProperty(required=True)

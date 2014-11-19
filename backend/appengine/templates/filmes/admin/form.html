@@ -1,6 +1,6 @@
 {% extends 'filmes/base.html' %}
 {% block body %}
-    {% set filme=filme or None %}
+    {% set filmes=filmes or None %}
     {% set errors=errors or None %}
     <div class="container">
         <div class="row">
@@ -8,15 +8,15 @@
                 <br/>
 
                 <div class="well">
-                    <h1 class="text-center">{% trans %}Filme Form{% endtrans %}</h1>
+                    <h1 class="text-center">{% trans %}Filmes Form{% endtrans %}</h1>
 
                     <form action="{{ save_path }}" method="post" role="form">
                         {{ csrf_input() }}
-                        {{ form_input(_('Titulo'),'titulo',filme.titulo,errors.titulo) }}
-                        {{ form_input(_('Lancamento'),'lancamento',filme.lancamento,errors.lancamento) }}
-                        {{ form_input(_('De'),'de',filme.de,errors.de) }}
-                        {{ form_input(_('Genero'),'genero',filme.genero,errors.genero) }}
-                        {{ form_input(_('Com'),'com',filme.com,errors.com) }}
+                        {{ form_input(_('Titulo'),'titulo',filmes.titulo,errors.titulo) }}
+                        {{ form_input(_('Lancamento'),'lancamento',filmes.lancamento,errors.lancamento) }}
+                        {{ form_input(_('De'),'de',filmes.de,errors.de) }}
+                        {{ form_input(_('Genero'),'genero',filmes.genero,errors.genero) }}
+                        {{ form_input(_('Com'),'com',filmes.com,errors.com) }}
                         <button type="submit" class="btn btn-success">{% trans %}Save{% endtrans %}</button>
                     </form>
                 </div>

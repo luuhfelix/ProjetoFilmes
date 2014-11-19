@@ -1,0 +1,36 @@
+<div class="well">
+    <h1 class="text-center">Formulário de Filmes</h1>
+        <div class="form-group" ng-class="{true:'',false: 'has-error'}[errors.titulo==null]">
+            <label for="tituloInput" class="control-label">Título </label>
+            <input id="tituloInput" type="text" class="form-control" ng-model="cartaz.titulo">
+            <span class="help-block" ng-show="errors.titulo">{{errors.titulo}}</span>
+        </div>
+
+        <div class="form-group" ng-class="{true:'',false: 'has-error'}[errors.lancamento==null]">
+            <label for="lancamentoInput" class="control-label">Lançamento </label>
+            <input id="lancamentoInput" type="text" class="form-control" ng-model="cartaz.lancamento">
+            <span class="help-block" ng-show="errors.lancamento">{{errors.lancamento}}</span>
+        </div>
+
+        <div class="form-group" ng-class="{true:'',false: 'has-error'}[errors.de==null]">
+            <label for="deInput" class="control-label">De </label>
+            <input id="deInput" type="text" class="form-control" ng-model="cartaz.de">
+            <span class="help-block" ng-show="errors.de">{{errors.de}}</span>
+        </div>
+
+        <div class="form-group" ng-class="{true:'',false: 'has-error'}[errors.genero==null]">
+            <label for="generoInput" class="control-label">Gênero</label>
+            <input id="generoInput" type="text" class="form-control" ng-model="cartaz.genero">
+            <span class="help-block" ng-show="errors.genero">{{errors.genero}}</span>
+        </div>
+
+        <div class="form-group" ng-class="{true:'',false: 'has-error'}[errors.com==null]">
+            <label for="comInput" class="control-label">Com</label>
+            <input id="comInput" type="text" class="form-control" ng-model="cartaz.com">
+            <span class="help-block" ng-show="errors.com">{{errors.com}}</span>
+        </div>
+
+        <button type="submit" class="btn btn-success" ng-click="salvar()" ng-hide="salvandoFlag" >Salvar</button>
+            <img src="/static/img/ajax.gif" ng-show="salvandoFlag" />
+
+</div>

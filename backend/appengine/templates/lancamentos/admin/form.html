@@ -1,0 +1,27 @@
+{% extends 'lancamentos/base.html' %}
+{% block body %}
+    {% set lancamento=lancamento or None %}
+    {% set errors=errors or None %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <br/>
+
+                <div class="well">
+                    <h1 class="text-center">{% trans %}Lancamento Form{% endtrans %}</h1>
+
+                    <form action="{{ save_path }}" method="post" role="form">
+                        {{ csrf_input() }}
+                        {{ form_input(_('Titulo'),'titulo',lancamento.titulo,errors.titulo) }}
+                        {{ form_input(_('Lancamento'),'lancamento',lancamento.lancamento,errors.lancamento) }}
+                        {{ form_input(_('De'),'de',lancamento.de,errors.de) }}
+                        {{ form_input(_('Genero'),'genero',lancamento.genero,errors.genero) }}
+                        {{ form_input(_('Com'),'com',lancamento.com,errors.com) }}
+                        <button type="submit" class="btn btn-success">{% trans %}Save{% endtrans %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

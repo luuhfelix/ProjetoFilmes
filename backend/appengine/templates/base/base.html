@@ -17,10 +17,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+
     <title>{% block title %}Filmes{% endblock %}</title>
     <!-- Bootstrap -->
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/default.css" rel="stylesheet">
+
     <style>
         .pad8 {
             margin: 8px 15px;
@@ -34,6 +37,8 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     {% block css %}{% endblock %}
+    <script type="application/javascript" src="/static/jquery-1.11.1.min.js"></script>
+    <script type="application/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
     {% block js %}{% endblock %}
 </head>
 <body>
@@ -50,8 +55,10 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 {% macro select_tab(tab='') %}
-                    <li {{ 'class=active' if tab=='FILMES' }}><a href="/filmes">{% trans %}Filmes{% endtrans %}</a></li>
+                    <li {{ 'class=active' if tab=='filmecartazs'}}><a href="/filmecartazs">{% trans %}Filmes em Cartaz{% endtrans %}</a></li>
+                    <li {{ 'class=active' if tab=='filmes'}}><a href="/filmes">{% trans %}Próximos Lançamentos{% endtrans %}</a></li>
                     <li {{ 'class=active' if tab=='trailers' }}><a href="/trailers">{% trans %}Trailers{% endtrans %}</a></li>
+
                     {% if _logged_user and 'ADMIN' in _logged_user.groups %}
                         <li {{ 'class=active' if tab=='ADMIN' }}><a href="/admin">{% trans %}Admin{% endtrans %}</a></li>
                     {% endif %}

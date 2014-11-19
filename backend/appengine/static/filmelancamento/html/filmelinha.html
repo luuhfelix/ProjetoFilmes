@@ -1,0 +1,25 @@
+<tr>
+    <td>
+    <button class="btn btn-success btm-sm" ng-hide="ajaxFlag || editingFlag">
+             <i class="glyphicon glyphicon-pencil" ng-click="editar()"></i></button>
+    <div style="width: 150px;">
+    <button class="btn btn-success btm-sm" ng-hide="ajaxFlag || !editingFlag">
+             <i class="glyphicon glyphicon-floppy-save" ng-click="completarEdicao()"></i></button>
+    <button class="btn btn-warning btm-sm" ng-hide="ajaxFlag || !editingFlag">
+             <i class="glyphicon glyphicon-floppy-remove" ng-click="cancelarEdicao()"></i></button>
+    </div>
+    </td>
+    <img src="/static/img/ajax.gif" ng-show="ajaxFlag"/>
+    <td><span ng-hide="editingFlag">{{ cartaz.titulo }}</span> <input ng-show="editingFlag" type="text" ng-model="cartazEdicao.titulo"> </td>
+    <td><span ng-hide="editingFlag">{{ cartaz.lancamento }}</span> <input ng-show="editingFlag" type="text" ng-model="cartazEdicao.lancamento"> </td>
+    <td><span ng-hide="editingFlag">{{ cartaz.de }}</span> <input ng-show="editingFlag" type="text" ng-model="cartazEdicao.de"></td>
+    <td><span ng-hide="editingFlag">{{ cartaz.genero }}</span> <input ng-show="editingFlag" type="text" ng-model="cartazEdicao.genero"></td>
+    <td><span ng-hide="editingFlag">{{ cartaz.com }}</span> <input ng-show="editingFlag" type="text" ng-model="cartazEdicao.com"></td>
+    <td>
+        <button class="btn btn-danger btm-sm" ng-hide="ajaxFlag"
+                ng-click="deletar()">
+            <i class="glyphicon glyphicon-trash"></i>
+        </button>
+        <img src="/static/img/ajax.gif" ng-show="ajaxFlag" />
+    </td>
+</tr>

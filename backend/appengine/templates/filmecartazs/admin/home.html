@@ -1,12 +1,12 @@
-{% extends 'filmes/base.html' %}
+{% extends 'filmecartazs/base.html' %}
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>{% trans %}This is a generic home for filme_app {% endtrans %}  </h1>
-                <a href="{{ new_path }}" class="btn btn-success">{% trans %}Create New Filmes{% endtrans %}</a>
+                <h1>{% trans %}This is a generic home for filmecartaz_app {% endtrans %}  </h1>
+                <a href="{{ new_path }}" class="btn btn-success">{% trans %}Create New Cartaz{% endtrans %}</a>
                 <hr/>
-                <h2>{% trans %}List of Filmess{% endtrans %}</h2>
+                <h2>{% trans %}List of Cartazs{% endtrans %}</h2>
                 <table class="table table-striped table-hover">
                     <thead>
                     <tr>
@@ -21,19 +21,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for filmes in filmess %}
+                    {% for cartaz in cartazs %}
                         <tr>
-                            <td><a href="{{ filmes.edit_path }}" class="btn btn-success btn-sm"><i
+                            <td><a href="{{ cartaz.edit_path }}" class="btn btn-success btn-sm"><i
                                     class="glyphicon glyphicon-pencil"></i></a></td>
-                            <td>{{ filmes.id }}</td>
-                            <td>{{ filmes.creation }}</td>
-                            <td>{{ filmes.titulo }}</td>
-                            <td>{{ filmes.lancamento }}</td>
-                            <td>{{ filmes.de }}</td>
-                            <td>{{ filmes.genero }}</td>
-                            <td>{{ filmes.com }}</td>
+                            <td>{{ cartaz.id }}</td>
+                            <td>{{ cartaz.creation }}</td>
+                            <td>{{ cartaz.titulo }}</td>
+                            <td>{{ cartaz.lancamento }}</td>
+                            <td>{{ cartaz.de }}</td>
+                            <td>{{ cartaz.genero }}</td>
+                            <td>{{ cartaz.com }}</td>
                             <td>
-                                <form action="{{ filmes.delete_path }}" method="post" onsubmit="return confirm('{{_('Are you sure to delete? Press cancel to avoid deletion.')}}');">
+                                <form action="{{ cartaz.delete_path }}" method="post" onsubmit="return confirm('{{_('Are you sure to delete? Press cancel to avoid deletion.')}}');">
                                     {{ csrf_input() }}
                                     <button class="btn btn-danger btn-sm"><i
                                             class="glyphicon glyphicon-trash"></i></button>
